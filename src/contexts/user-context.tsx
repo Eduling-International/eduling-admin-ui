@@ -5,6 +5,9 @@ import * as React from 'react';
 import type { User } from '@/types/user';
 import { authClient } from '@/lib/auth/client';
 import { logger } from '@/lib/default-logger';
+import { useAuthStore } from '@/store';
+import { Logger } from '@/logger/Logger';
+import { useSession } from 'next-auth/react';
 
 export interface UserContextValue {
   user: User | null;
@@ -25,6 +28,10 @@ export function UserProvider({ children }: UserProviderProps): React.JSX.Element
     error: null,
     isLoading: true,
   });
+  const { data: session, status } = useSession();
+  const logger = React.useMemo(() => {
+    return new Logger();
+  }, [])
 
   const checkSession = React.useCallback(async (): Promise<void> => {
     try {

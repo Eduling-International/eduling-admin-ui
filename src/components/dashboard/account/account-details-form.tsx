@@ -25,7 +25,7 @@ export function AccountDetailsForm(): React.JSX.Element {
   return (
     <form
       onSubmit={(event) => {
-        event.preventDefault();
+        event.preventDefault(); 
       }}
     >
       <Card>

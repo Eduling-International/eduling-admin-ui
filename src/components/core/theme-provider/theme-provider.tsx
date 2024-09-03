@@ -7,6 +7,8 @@ import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/s
 import { createTheme } from '@/styles/theme/create-theme';
 
 import EmotionCache from './emotion-cache';
+import ToastProvider from '@/core/components/ToastProvider';
+import LoadingProvider from '@/core/components/LoadingProvider';
 
 export interface ThemeProviderProps {
   children: React.ReactNode;
@@ -19,6 +21,8 @@ export function ThemeProvider({ children }: ThemeProviderProps): React.JSX.Eleme
     <EmotionCache options={{ key: 'mui' }}>
       <CssVarsProvider theme={theme}>
         <CssBaseline />
+        <ToastProvider />
+        <LoadingProvider />
         {children}
       </CssVarsProvider>
     </EmotionCache>
