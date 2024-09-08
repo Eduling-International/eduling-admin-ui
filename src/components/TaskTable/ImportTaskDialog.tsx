@@ -28,6 +28,7 @@ import {
   GearFine,
   UploadSimple,
 } from '@phosphor-icons/react';
+import { HttpStatusCode } from 'axios';
 import * as React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z as zod } from 'zod';
@@ -54,7 +55,10 @@ export const ImportTaskDialog: React.FC = React.memo(() => {
     resolver: zodResolver(formSchema),
   });
   const [importDialogOpen, setImportDialogOpen] = React.useState(false);
-  const openImportDialog = React.useCallback(() => setImportDialogOpen(true), []);
+  const openImportDialog = React.useCallback(
+    () => setImportDialogOpen(true),
+    [],
+  );
   const closeImportDialog = React.useCallback(
     () => setImportDialogOpen(false),
     [],
@@ -143,11 +147,16 @@ export const ImportTaskDialog: React.FC = React.memo(() => {
                 Reset
               </Button>
             </Box>
-            {data?.status === 200 && (
+            {(data && !data.statusCode) ? (
               <Alert icon={<Check />} severity="success">
                 Import task was succeed. Close and check !
               </Alert>
-            )}
+            ) : null}
+            {(data?.statusCode && data?.statusCode !== HttpStatusCode.Ok) ? (
+              <Alert icon={<Bug />} severity="error">
+                {data?.message}
+              </Alert>
+            ) : null}
             {error && (
               <Alert icon={<Bug />} severity="error">
                 {error}

@@ -29,7 +29,7 @@ export default class TaskService extends APIBaseService {
 
   public import = (data: ImportTaskBody) => {
     data.range = data.range ? '!' + data.range : null;
-    return this.post<{ status: number; message: string }>(
+    return this.post<{ statusCode: number; message: string }>(
       this.PREFIX + '/import',
       data,
     );
