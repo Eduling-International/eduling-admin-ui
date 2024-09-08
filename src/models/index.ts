@@ -17,6 +17,7 @@ import CreateCourseResponse from './CreateCourseResponse';
 import CourseDetailsResponse from './CourseDetailsResponse';
 import UpdateCourseBody from './UpdateCourseBody';
 import AddTaskToCourseBody from './AddTaskToCourseBody';
+import ImportTaskBody from './ImportTaskBody';
 
 export type {
   LoginBody,
@@ -38,4 +39,5 @@ export type {
   CourseDetailsResponse,
   UpdateCourseBody,
   AddTaskToCourseBody,
+  ImportTaskBody,
 };

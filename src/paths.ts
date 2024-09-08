@@ -10,6 +10,7 @@ export const paths = {
     account: '/dashboard/account',
     customers: '/dashboard/customers',
     courses: '/dashboard/courses',
+    tasks: '/dashboard/tasks',
     createCourse: '/dashboard/courses/create',
     integrations: '/dashboard/integrations',
     settings: '/dashboard/settings',

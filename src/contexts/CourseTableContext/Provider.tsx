@@ -138,7 +138,7 @@ const courseTableReducer = (
 
 const courseService = new CourseService();
 
-export const CourseTableContext = React.createContext<CourseTableContextType>(
+export const CourseTableContext = React.createContext(
   {} as CourseTableContextType,
 );
 
@@ -169,7 +169,7 @@ export const CourseTableProvider: React.FC<CourseTableProviderProps> = ({
   );
   const search = React.useCallback(() => {
     return searchCourses(searchParams);
-  }, []);
+  }, [searchParams]);
   const updateVisibility = React.useCallback(
     async (id: string, visible: boolean) => {
       const courseIndex = state.allCourses.findIndex(

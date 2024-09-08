@@ -7,6 +7,7 @@ import { Users as UsersIcon } from '@phosphor-icons/react/dist/ssr/Users';
 import { XSquare } from '@phosphor-icons/react/dist/ssr/XSquare';
 import { BookOpen } from '@phosphor-icons/react/dist/ssr/BookOpen';
 import { Plus } from '@phosphor-icons/react/dist/ssr';
+import { ListBullets } from '@phosphor-icons/react';
 
 export const navIcons = {
   'chart-pie': ChartPieIcon,
@@ -17,4 +18,5 @@ export const navIcons = {
   users: UsersIcon,
   courses: BookOpen,
   createCourse: Plus,
+  tasks: ListBullets
 } as Record<string, Icon>;

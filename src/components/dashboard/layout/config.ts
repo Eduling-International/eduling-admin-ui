@@ -39,6 +39,12 @@ export const navItems = [
     icon: 'x-square',
   },
   {
+    key: 'tasks',
+    title: 'Tasks',
+    href: paths.dashboard.tasks,
+    icon: 'tasks',
+  },
+  {
     key: 'courses',
     title: 'Courses',
     href: paths.dashboard.courses,
