@@ -21,30 +21,34 @@ export default class CourseService extends APIBaseService {
     return this.get<CountResponse>(this.PREFIX + '/count');
   }
 
-  public async search(params?: SearchCourseParams) {
+  public search = (params?: SearchCourseParams) => {
     return this.get<Course[], SearchCourseParams>(
       this.PREFIX + '/search',
       params,
     );
   }
 
-  public async rearrange(courseId: string, displayOrder: number) {
+  public rearrange = (courseId: string, displayOrder: number) => {
     return this.put<UpdateResponse>(
       `${this.PREFIX}/${courseId}/${displayOrder}/rearrange`,
     );
   }
 
-  public create(data: CreateCourseBody) {
+  public create = (data: CreateCourseBody) => {
     return this.post<CreateCourseResponse>(`${this.PREFIX}/create`, data);
   }
 
-  public getDetails(courseId: string) {
+  public getDetails= (courseId: string) => {
     return this.get<CourseDetailsResponse>(
       `${this.PREFIX}/${courseId}/details`,
     );
   }
 
-  public update(courseId: string, data: UpdateCourseBody) {
+  public update = (courseId: string, data: UpdateCourseBody) => {
     return this.put<UpdateResponse>(`${this.PREFIX}/${courseId}/update`, data);
+  }
+
+  public updateStatus = (courseId: string, visible: boolean) => {
+    return this.put<UpdateResponse>(`${this.PREFIX}/${courseId}/update-status/${visible}`);
   }
 }

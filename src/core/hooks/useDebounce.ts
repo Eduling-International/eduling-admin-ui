@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-const useDebounce = <T>(
+const useDebounce = <T, P>(
   value: T,
   delay: number,
-  callback: (value: T) => Promise<void>,
+  callback: (value: T) => Promise<P>,
 ) => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 

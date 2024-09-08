@@ -9,6 +9,8 @@ interface PopupStoreValue {
     message: string,
     type?: OverridableStringUnion<AlertColor, AlertPropsColorOverrides>,
   ) => void;
+  toastError: (message: string) => void;
+  toastSuccess: (message: string) => void;
   clear: () => void;
 }
 
@@ -22,6 +24,12 @@ const usePopupStore = create<PopupStoreValue>((set) => ({
   message: undefined,
   toast: function (message, type = 'info') {
     set(() => ({ message, type }));
+  },
+  toastError: function (message) {
+    set(() => ({ message, type: 'error' }));
+  },
+  toastSuccess: function (message) {
+    set(() => ({ message, type: 'success' }));
   },
   clear: function () {
     set(() => ({ message: undefined, type: undefined }));

@@ -12,8 +12,8 @@ export default class TaskService extends APIBaseService {
     return this.get<CountResponse>(this.PREFIX + '/count');
   }
 
-  public search(params: SearchTaskParams) {
-    return this.get<SearchTaskResponse>(this.PREFIX + '/search', {
+  public search = (params: SearchTaskParams) => {
+    return this.get<SearchTaskResponse, SearchTaskParams>(this.PREFIX + '/search', {
       ...params,
       categoryId: params?.categoryId?.trim(),
     });

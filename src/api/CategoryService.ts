@@ -17,7 +17,7 @@ export default class CategoryService extends APIBaseService {
     return this.get<CountResponse>(this.PREFIX + '/count');
   }
 
-  public search(params?: SearchCategoryParams) {
+  public search = (params?: SearchCategoryParams) => {
     return this.get<Category[], SearchCourseParams>(
       this.PREFIX + '/search',
       params,

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { Plus as PlusIcon } from '@phosphor-icons/react/dist/ssr/Plus';
-import { CoursesTable } from '@/components/dashboard/courses';
+import { CourseTableContainer } from '@/components/CourseTable';
 
 export default function Page() {
   return (
@@ -22,7 +22,7 @@ export default function Page() {
           </Button>
         </div>
       </Stack>
-      <CoursesTable />
+      <CourseTableContainer />
     </Stack>
   );
 }

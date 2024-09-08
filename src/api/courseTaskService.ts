@@ -11,20 +11,28 @@ export default class CourseTaskService extends APIBaseService {
     this.courseId = courseId;
   }
 
-  public addTask(data: AddTaskToCourseBody) {
+  public addTask = (data: AddTaskToCourseBody) => {
     return this.post<UpdateResponse>(
       `${this.PREFIX}/${this.courseId}/tasks/add`,
       data,
     );
-  }
+  };
 
-  public lockTask(taskKey: string, locked: boolean) {
+  public lockTask = (taskKey: string, locked: boolean) => {
+    return this.put<UpdateResponse>(
+      `${this.PREFIX}/${this.courseId}/tasks/${taskKey}/update-lock/${locked}`,
+    );
+  };
 
-  }
-
-  public removeTask(taskKey: string) {
+  public removeTask = (taskKey: string) => {
     return this.delete<UpdateResponse>(
       `${this.PREFIX}/${this.courseId}/tasks/${taskKey}/delete`,
     );
-  }
+  };
+
+  public rearrange = (taskKey: string, newOrder: number) => {
+    return this.put<UpdateResponse>(
+      `${this.PREFIX}/${this.courseId}/tasks/${taskKey}/${newOrder}/rearrange`,
+    );
+  };
 }

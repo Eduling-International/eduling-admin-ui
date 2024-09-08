@@ -4,7 +4,7 @@ import CategoryService from './CategoryService';
 import CourseService from './CourseService';
 import TaskService from './TaskService';
 import UserService from './UserService';
-import CourseTaskService from './courseTaskService';
+import CourseTaskService from './CourseTaskService';
 
 export {
   APIBaseService,
