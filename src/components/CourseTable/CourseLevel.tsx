@@ -26,6 +26,7 @@ const CourseLevel: React.FC<LevelBadgeProps> = ({ level, sx }) => {
           variant="outlined"
           label={level}
           size="small"
+          key={level}
         />
       ))}
     </CourseLevelWrapper>

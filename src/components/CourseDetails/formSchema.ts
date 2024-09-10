@@ -8,4 +8,3 @@ export const formSchema = zod.object({
   visible: zod.boolean(),
   coverPicture: zod.string().min(1, 'Pick up a cover'),
 }) satisfies zod.ZodType<UpdateCourseBody>;
-;
