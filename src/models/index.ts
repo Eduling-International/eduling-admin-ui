@@ -18,6 +18,7 @@ import CourseDetailsResponse from './CourseDetailsResponse';
 import UpdateCourseBody from './UpdateCourseBody';
 import AddTaskToCourseBody from './AddTaskToCourseBody';
 import ImportTaskBody from './ImportTaskBody';
+import RequirePasswordBody from './RequirePasswordBody';
 
 export type {
   LoginBody,
@@ -40,4 +41,5 @@ export type {
   UpdateCourseBody,
   AddTaskToCourseBody,
   ImportTaskBody,
+  RequirePasswordBody,
 };

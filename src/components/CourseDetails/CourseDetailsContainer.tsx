@@ -34,6 +34,7 @@ import { GeneralInfoForm } from '@/components/CourseCommon';
 import { CourseCoverPicker, covers } from '@/components/CourseCoverPicker';
 import CourseTaskSelection from '@/components/CourseTaskSelection';
 import { usePopupStore } from '@/core/store';
+import { DeleteCourseButton } from './DeleteCourseButton';
 
 const courseService = new CourseService();
 const logService = new Logger();
@@ -181,6 +182,7 @@ export const CourseDetailsContainer: React.FC<CourseDetailsContainerProps> =
               Course details
             </Typography>
             <Box>
+              <DeleteCourseButton courseId={courseDetails?.id} courseName={courseDetails?.name} />
               <Tooltip title="Refresh">
                 <IconButton
                   disabled={loading}
