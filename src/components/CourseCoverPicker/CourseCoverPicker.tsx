@@ -24,7 +24,7 @@ export const CourseCoverPicker: React.FC<CourseCoverPickerProps> = React.memo(
             fontSize={16}
             component="div"
           >
-            Pick up cover
+            Pick a cover
             {error && (
               <span
                 style={{ margin: '0 3px 0 3px', color: 'red', fontSize: 14 }}

@@ -114,9 +114,9 @@ export const DeleteCourseButton: React.FC<DeleteCourseButtonProps> = React.memo(
         </Button>
         <Dialog fullWidth maxWidth="sm" open={confirmDialogOpen}>
           <DialogTitle>
-            Do you want to delete course <b>{courseName}</b> ?
+            Do you want to delete course <b>{courseName}</b>?
             <br />
-            <i style={{ color: 'red' }}>You can not undo this action !</i>
+            <i style={{ color: 'red' }}>You cannot undo this action!</i>
           </DialogTitle>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
             <DialogContent>
