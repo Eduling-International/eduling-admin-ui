@@ -2,7 +2,7 @@
 
 import { useTaskSelectionContext } from '@/contexts/TaskSelectionContext';
 import { DnDComponent, Droppable } from '@/core/components/DnD';
-import { Box, Typography, Stack, Grid } from '@mui/material';
+import { Box, Typography, Stack, Button } from '@mui/material';
 import { StackPlus } from '@phosphor-icons/react';
 import * as React from 'react';
 import {
@@ -12,6 +12,10 @@ import {
 } from 'react-beautiful-dnd';
 import CourseTaskUIComponent from './CourseTaskUIComponent';
 import ToggleChildWrapper from './ToggleChildWrapper';
+import { CourseService } from '@/api';
+import useLazyFetch from '@/fetch/useLazyFetch';
+import { usePopupStore } from '@/core/store';
+import { useRouter } from 'next/navigation';
 
 const getDragStyle = (
   isDragging: boolean,
@@ -22,8 +26,31 @@ const getDragStyle = (
   ...draggableStyle,
 });
 
+const courseService = new CourseService();
+
 const ListCourseTask: React.FC = React.memo(() => {
-  const { courseTasks, rearrangeHandler } = useTaskSelectionContext();
+  const router = useRouter();
+  const { toastSuccess } = usePopupStore();
+  const { courseTasks, rearrangeHandler, enableRearrangeAll, currentCourseId } =
+    useTaskSelectionContext();
+
+  const [{ data, loading }, executeRearrangeAll] = useLazyFetch(
+    courseService.rearrangeAllTasks,
+  );
+
+  const handleClickSync = React.useCallback(() => {
+    console.log(currentCourseId);
+    if (enableRearrangeAll === true && currentCourseId !== undefined) {
+      executeRearrangeAll(currentCourseId);
+    }
+  }, [enableRearrangeAll, currentCourseId]);
+
+  React.useEffect(() => {
+    if (data && data.message) {
+      router.refresh();
+      toastSuccess("Tasks rearranged by latest order. Page will refresh automatically.");
+    }
+  }, [data]);
 
   return (
     <React.Fragment>
@@ -56,6 +83,19 @@ const ListCourseTask: React.FC = React.memo(() => {
             >
               Tasks in course ({courseTasks.length})
             </Typography>
+            {enableRearrangeAll && (
+              <div>
+                <Button
+                  sx={{ padding: 0, paddingX: 2, borderRadius: 1 }}
+                  color="secondary"
+                  variant="outlined"
+                  disabled={loading}
+                  onClick={handleClickSync}
+                >
+                  SYNC
+                </Button>
+              </div>
+            )}
           </Box>
           <Box
             sx={{

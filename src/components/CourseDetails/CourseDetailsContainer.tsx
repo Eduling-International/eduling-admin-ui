@@ -258,6 +258,8 @@ export const CourseDetailsContainer: React.FC<CourseDetailsContainerProps> =
               onRearrangeCallback={onRearrangeCallback}
               courseTasks={courseDetails?.tasks || []}
               enableConfirmDialog
+              enableRearrangeAll
+              currentCourseId={courseId}
             />
           </Stack>
         </Stack>

@@ -15,10 +15,11 @@ export interface CourseTaskSelectionProps extends TaskSelectionProviderProps {
 
 const CourseTaskSelection: React.FC<CourseTaskSelectionProps> = ({
   children,
+  courseId,
   ...props
 }) => {
   return (
-    <TaskSelectionProvider {...props}>
+    <TaskSelectionProvider currentCourseId={courseId} {...props}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={7} lg={7}>
           <Card sx={{ p: 3 }}>

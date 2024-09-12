@@ -17,6 +17,7 @@ export interface TaskSelectionContextType {
   searchParams: SearchTaskParams;
   currentCourseId?: string;
   enableConfirmDialog?: boolean;
+  enableRearrangeAll?: boolean;
   dispatchSearchParams: React.Dispatch<SearchParamsAction>;
   dispatchLazyLoader: (value: ListTaskLazyLoaderAction) => void;
   onScrollDown: () => void;
@@ -40,6 +41,7 @@ export interface TaskSelectionProviderProps {
   children?: React.ReactNode;
   currentCourseId?: string;
   enableConfirmDialog?: boolean;
+  enableRearrangeAll?: boolean;
 }
 
 // Define reducers
@@ -150,6 +152,7 @@ export const TaskSelectionProvider: React.FC<TaskSelectionProviderProps> = React
   children,
   enableConfirmDialog,
   currentCourseId,
+  enableRearrangeAll,
   ...props
 }) => {
   const { toastError } = usePopupStore();
@@ -307,6 +310,7 @@ export const TaskSelectionProvider: React.FC<TaskSelectionProviderProps> = React
         searchParams: searchParamsValue,
         currentCourseId: currentCourseId,
         enableConfirmDialog,
+        enableRearrangeAll,
         dispatchSearchParams,
         dispatchLazyLoader,
         clickAddHandler,

@@ -61,4 +61,10 @@ export default class CourseService extends APIBaseService {
       body,
     );
   };
+
+  public rearrangeAllTasks = (courseId: string) => {
+    return this.put<{
+      message: string;
+    }>(`${this.PREFIX}/${courseId}/rearrange-all`);
+  };
 }
