@@ -8,6 +8,20 @@ export const navItems = [
     href: paths.dashboard.overview,
     icon: 'chart-pie',
   },
+  {
+    key: 'admin',
+    title: 'Admin',
+    href: paths.dashboard.admin,
+    icon: 'admin',
+    items: [
+      {
+        key: 'create-admin',
+        title: 'New',
+        href: paths.dashboard.createAdmin,
+        icon: 'user-circle-plus',
+      },
+    ],
+  },
   // {
   //   key: 'customers',
   //   title: 'Customers',

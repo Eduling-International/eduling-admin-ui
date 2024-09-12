@@ -7,6 +7,8 @@ export const paths = {
   },
   dashboard: {
     overview: '/dashboard',
+    admin: '/dashboard/admin',
+    createAdmin: '/dashboard/admin/create',
     account: '/dashboard/account',
     customers: '/dashboard/customers',
     courses: '/dashboard/courses',
