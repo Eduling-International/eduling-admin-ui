@@ -156,7 +156,7 @@ export const TaskSelectionProvider: React.FC<TaskSelectionProviderProps> = React
   ...props
 }) => {
   const { toastError } = usePopupStore();
-  const [courseTasks, setCourseTasks] = React.useState<Task[]>([]);
+  const [courseTasks, setCourseTasks] = React.useState<Task[]>(props.courseTasks);
   const [lazyLoaderValue, dispatchLazyLoader] = React.useReducer(
     lazyLoaderReducer,
     {
@@ -295,10 +295,6 @@ export const TaskSelectionProvider: React.FC<TaskSelectionProviderProps> = React
       dispatchLazyLoader({ type: 'APPEND', payload: receiveTasks });
     }
   }, [receiveTasks]);
-
-  React.useEffect(() => {
-    setCourseTasks(props.courseTasks);
-  }, [props.courseTasks])
 
   return (
     <TaskSelectionContext.Provider

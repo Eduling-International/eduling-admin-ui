@@ -22,6 +22,7 @@ import {
   Box,
   Button,
   Tooltip,
+  CircularProgress,
 } from '@mui/material';
 import {
   Check,
@@ -102,7 +103,7 @@ export const CourseDetailsContainer: React.FC<CourseDetailsContainerProps> =
     const onClickUndoCallback = React.useCallback(async (key: string) => {
       const { isError } = await courseTaskService.removeTask(key);
       if (!isError) {
-        toastSuccess('The task was added to course!');
+        toastSuccess('The task has been removed from the course.!');
       }
     }, []);
     const onChangeAccessibilityCallback = React.useCallback(
@@ -112,7 +113,8 @@ export const CourseDetailsContainer: React.FC<CourseDetailsContainerProps> =
           isLocked ?? true,
         );
         if (!isError) {
-          toastSuccess('The task was added to course!');
+          const status = isLocked ? "locked" : "opened";
+          toastSuccess(`The task was transformed to ${status}!`);
         }
       },
       [],
@@ -157,112 +159,126 @@ export const CourseDetailsContainer: React.FC<CourseDetailsContainerProps> =
     }, [courseDetails]);
 
     return (
-      <FormProvider {...methods}>
-        <Dialog inert onClose={closeDialog} open={confirmDialogOpen}>
-          <DialogTitle>Confirm</DialogTitle>
-          <DialogContent>
-            <DialogContentText>Do you want to save changes?</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <IconButton onClick={closeDialog} color="error">
-              <Cancel />
-            </IconButton>
-            <IconButton
-              disabled={updateLoading}
-              color="success"
-              onClick={executeUpdateCourse}
-            >
-              <Check />
-            </IconButton>
-          </DialogActions>
-        </Dialog>
-        <Stack spacing={2}>
-          <Box display="flex">
-            <Typography flex={1} component="div" variant="h4">
-              Course details
-            </Typography>
-            <Box>
-              <DeleteCourseButton courseId={courseDetails?.id} courseName={courseDetails?.name} />
-              <Tooltip title="Refresh">
-                <IconButton
-                  disabled={loading}
-                  onClick={getCourseDetails.bind(null, courseId)}
-                  color="primary"
-                  size="large"
-                >
-                  <ArrowClockwise />
+      <React.Fragment>
+        {courseDetails && (
+          <FormProvider {...methods}>
+            <Dialog inert onClose={closeDialog} open={confirmDialogOpen}>
+              <DialogTitle>Confirm</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Do you want to save changes?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <IconButton onClick={closeDialog} color="error">
+                  <Cancel />
                 </IconButton>
-              </Tooltip>
-            </Box>
-          </Box>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Stack spacing={4}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={12} md={7} lg={7}>
-                  <Card sx={{ p: 3 }}>
-                    <GeneralInfoForm />
-                  </Card>
-                </Grid>
-                <Grid item xs={12} sm={12} md={5} lg={5}>
-                  <Card sx={{ p: 3 }}>
-                    <CourseCoverPicker
-                      value={methods.watch('coverPicture')}
-                      onChange={onCoverChange}
-                      error={Boolean(methods.formState.errors.coverPicture)}
-                      helperText={
-                        methods.formState.errors.coverPicture?.message
-                      }
-                    />
-                  </Card>
-                </Grid>
-              </Grid>
+                <IconButton
+                  disabled={updateLoading}
+                  color="success"
+                  onClick={executeUpdateCourse}
+                >
+                  <Check />
+                </IconButton>
+              </DialogActions>
+            </Dialog>
+            <Stack spacing={2}>
+              <Box display="flex">
+                <Typography flex={1} component="div" variant="h4">
+                  Course details
+                </Typography>
+                <Box>
+                  <DeleteCourseButton
+                    courseId={courseDetails?.id}
+                    courseName={courseDetails?.name}
+                  />
+                  <Tooltip title="Refresh">
+                    <IconButton
+                      disabled={loading}
+                      onClick={getCourseDetails.bind(null, courseId)}
+                      color="primary"
+                      size="large"
+                    >
+                      <ArrowClockwise />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              </Box>
+              <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <Stack spacing={4}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={12} md={7} lg={7}>
+                      <Card sx={{ p: 3 }}>
+                        <GeneralInfoForm />
+                      </Card>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={5} lg={5}>
+                      <Card sx={{ p: 3 }}>
+                        <CourseCoverPicker
+                          value={methods.watch('coverPicture')}
+                          onChange={onCoverChange}
+                          error={Boolean(methods.formState.errors.coverPicture)}
+                          helperText={
+                            methods.formState.errors.coverPicture?.message
+                          }
+                        />
+                      </Card>
+                    </Grid>
+                  </Grid>
+                </Stack>
+                <Box
+                  display={'flex'}
+                  gap={2}
+                  mt={2}
+                  flexDirection={'row-reverse'}
+                >
+                  <Button
+                    sx={{ fontWeight: 'bold' }}
+                    variant="contained"
+                    color="info"
+                    type="submit"
+                    disabled={loading}
+                  >
+                    {loading ? 'Loading...' : 'Save'}
+                  </Button>
+                  <Button
+                    sx={{ fontWeight: 'bold' }}
+                    variant="outlined"
+                    color="error"
+                    disabled={loading}
+                    onClick={redirectToCoursesPage}
+                  >
+                    Cancel
+                  </Button>
+                </Box>
+              </form>
+              <Stack gap={3}>
+                <Stack direction="row" alignItems="center" gap={1}>
+                  <Typography component="div" variant="h5">
+                    Rearrange tasks
+                  </Typography>
+                  <div>
+                    <Tooltip title="Your changes will take effect immediately.">
+                      <IconButton size="small">
+                        <Info />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                </Stack>
+                <CourseTaskSelection
+                  onClickAddCallback={onClickAddCallback}
+                  onClickUndoCallback={onClickUndoCallback}
+                  onChangeAccessibilityCallback={onChangeAccessibilityCallback}
+                  onRearrangeCallback={onRearrangeCallback}
+                  courseTasks={courseDetails.tasks}
+                  enableConfirmDialog
+                  enableRearrangeAll
+                  currentCourseId={courseId}
+                />
+              </Stack>
             </Stack>
-            <Box display={'flex'} gap={2} mt={2} flexDirection={'row-reverse'}>
-              <Button
-                sx={{ fontWeight: 'bold' }}
-                variant="contained"
-                color="info"
-                type="submit"
-                disabled={loading}
-              >
-                {loading ? 'Loading...' : 'Save'}
-              </Button>
-              <Button
-                sx={{ fontWeight: 'bold' }}
-                variant="outlined"
-                color="error"
-                disabled={loading}
-                onClick={redirectToCoursesPage}
-              >
-                Cancel
-              </Button>
-            </Box>
-          </form>
-          <Stack gap={3}>
-            <Stack direction="row" alignItems="center" gap={1}>
-              <Typography component="div" variant="h5">
-                Rearrange tasks
-              </Typography>
-              <div>
-                <Tooltip title="Your changes will take effect immediately.">
-                  <IconButton size="small">
-                    <Info />
-                  </IconButton>
-                </Tooltip>
-              </div>
-            </Stack>
-            <CourseTaskSelection
-              onClickAddCallback={onClickAddCallback}
-              onClickUndoCallback={onClickUndoCallback}
-              onChangeAccessibilityCallback={onChangeAccessibilityCallback}
-              onRearrangeCallback={onRearrangeCallback}
-              courseTasks={courseDetails?.tasks || []}
-              enableConfirmDialog
-              enableRearrangeAll
-              currentCourseId={courseId}
-            />
-          </Stack>
-        </Stack>
-      </FormProvider>
+          </FormProvider>
+        )}
+      </React.Fragment>
     );
   });

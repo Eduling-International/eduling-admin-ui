@@ -60,6 +60,19 @@ class APIBaseService {
     });
   }
 
+  protected async patch<R, D = any>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig<D>,
+  ) {
+    return this.exchange<R, D>({
+      ...config,
+      method: 'PATCH',
+      url: url,
+      data: data,
+    });
+  }
+
   protected async get<R, P = Record<string, string>>(url: string, params?: P) {
     return this.exchange<R, null>({
       params: params,

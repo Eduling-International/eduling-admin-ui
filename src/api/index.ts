@@ -5,6 +5,7 @@ import CourseService from './CourseService';
 import TaskService from './TaskService';
 import UserService from './UserService';
 import CourseTaskService from './CourseTaskService';
+import AdminUserService from './AdminUserService';
 
 export {
   APIBaseService,
@@ -14,4 +15,5 @@ export {
   TaskService,
   UserService,
   CourseTaskService,
+  AdminUserService,
 };

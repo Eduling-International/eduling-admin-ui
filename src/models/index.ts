@@ -19,6 +19,14 @@ import UpdateCourseBody from './UpdateCourseBody';
 import AddTaskToCourseBody from './AddTaskToCourseBody';
 import ImportTaskBody from './ImportTaskBody';
 import RequirePasswordBody from './RequirePasswordBody';
+import {
+  CurrentUserInfo,
+  UserInfoRole,
+  UserInfoCreatedUser,
+} from './CurrentUserInfo';
+import DeleteAdminUserBody from './DeleteAdminUserBody';
+import CreateAdminAccountBody from './CreateAdminAccountBody';
+import SearchAdminUserParam from './SearchAdminUserParam';
 
 export type {
   LoginBody,
@@ -42,4 +50,10 @@ export type {
   AddTaskToCourseBody,
   ImportTaskBody,
   RequirePasswordBody,
+  CurrentUserInfo,
+  UserInfoRole,
+  UserInfoCreatedUser,
+  DeleteAdminUserBody,
+  CreateAdminAccountBody,
+  SearchAdminUserParam,
 };
