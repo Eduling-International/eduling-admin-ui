@@ -13,14 +13,6 @@ export const navItems = [
     title: 'Admin',
     href: paths.dashboard.admin,
     icon: 'admin',
-    items: [
-      {
-        key: 'create-admin',
-        title: 'New',
-        href: paths.dashboard.createAdmin,
-        icon: 'plus',
-      },
-    ],
   },
   // {
   //   key: 'customers',

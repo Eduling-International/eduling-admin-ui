@@ -17,7 +17,7 @@ const AdminTableFilter: React.FC = React.memo(() => {
     <Card sx={{ p: 2 }}>
       <OutlinedInput
         fullWidth
-        placeholder="Username"
+        placeholder="Search by username"
         startAdornment={
           <InputAdornment position="start">
             <MagnifyingGlass fontSize="var(--icon-fontSize-md)" />

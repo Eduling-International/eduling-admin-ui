@@ -1,8 +1,9 @@
 import {
   CreateAdminAccountBody,
-  CurrentUserInfo,
   SearchAdminUserParam,
+  SearchAdminUserResponse,
   UpdateResponse,
+  RequirePasswordBody,
 } from '@/models';
 import APIBaseService from './APIBaseService';
 
@@ -14,7 +15,7 @@ export default class AdminUserService extends APIBaseService {
   }
 
   public search = (params: SearchAdminUserParam) => {
-    return this.get<CurrentUserInfo[], SearchAdminUserParam>(
+    return this.get<SearchAdminUserResponse, SearchAdminUserParam>(
       `${this.PREFIX}/search`,
       params,
     );
@@ -25,14 +26,14 @@ export default class AdminUserService extends APIBaseService {
   };
 
   public unArchive = (userId: string) => {
-    return this.patch<UpdateResponse>(`${this.PREFIX}/${userId}/un-archive`);
+    return this.patch<UpdateResponse>(`${this.PREFIX}/${userId}/un_archive`);
   };
 
-  public _delete = (userId: string) => {
-    return this.delete<UpdateResponse>(`${this.PREFIX}/${userId}`);
+  public _delete = (userId: string, body: RequirePasswordBody) => {
+    return this.delete<UpdateResponse>(`${this.PREFIX}/${userId}`, body);
   };
 
   public create = (data: CreateAdminAccountBody) => {
-    return this.post(`${this.PREFIX}/new`, data);
+    return this.post<{userId: string}>(`${this.PREFIX}/new`, data);
   };
 }

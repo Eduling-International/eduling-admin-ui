@@ -53,7 +53,6 @@ export const DeleteCourseButton: React.FC<DeleteCourseButtonProps> = React.memo(
     const {
       control,
       handleSubmit,
-      setError,
       reset,
       formState: { errors },
     } = useForm<RequirePasswordBody>({

@@ -24,9 +24,9 @@ import {
   UserInfoRole,
   UserInfoCreatedUser,
 } from './CurrentUserInfo';
-import DeleteAdminUserBody from './DeleteAdminUserBody';
 import CreateAdminAccountBody from './CreateAdminAccountBody';
 import SearchAdminUserParam from './SearchAdminUserParam';
+import SearchAdminUserResponse from './SearchAdminUserResponse';
 
 export type {
   LoginBody,
@@ -53,7 +53,7 @@ export type {
   CurrentUserInfo,
   UserInfoRole,
   UserInfoCreatedUser,
-  DeleteAdminUserBody,
   CreateAdminAccountBody,
   SearchAdminUserParam,
+  SearchAdminUserResponse,
 };

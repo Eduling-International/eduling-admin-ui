@@ -6,6 +6,7 @@ import * as React from 'react';
 // 管理者テーブロのコンテクストの定義.
 export interface AdminTableContextType {
   adminUsers: CurrentUserInfo[];
+  totalItems: number;
   searchLoading: boolean;
   searchParams: SearchAdminUserParam;
   onUsernameChange: (
@@ -13,6 +14,7 @@ export interface AdminTableContextType {
   ) => void;
   onPageChange: (page: number) => void;
   search: () => Promise<void>;
+  setAdminUsers: React.Dispatch<React.SetStateAction<CurrentUserInfo[]>>
 }
 
 export interface AdminTableProviderProps {
@@ -36,8 +38,10 @@ export const AdminTableProvider: React.FC<AdminTableProviderProps> = ({
     username: '',
     currentPage: 1,
   });
+  const [adminUsers, setAdminUsers] = React.useState<CurrentUserInfo[]>([]);
+  const [totalItems, setTotalItems] = React.useState<number>(0);
 
-  const [{ data: adminUsers, loading: searchLoading }, executeSearchAdminUser] =
+  const [{ data: response, loading: searchLoading }, executeSearchAdminUser] =
     useLazyFetch(adminUserService.search);
   const onUsernameChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -54,15 +58,27 @@ export const AdminTableProvider: React.FC<AdminTableProviderProps> = ({
     await executeSearchAdminUser(searchParams);
   }, [searchParams]);
 
+  React.useEffect(() => {
+    if (response) {
+      setAdminUsers(response.users);
+      setTotalItems(response.pagination.totalItems);
+    } else {
+      setAdminUsers([]);
+      setTotalItems(0);
+    }
+  }, [response]);
+
   return (
     <AdminTableContext.Provider
       value={{
-        adminUsers: adminUsers ?? [],
+        adminUsers: adminUsers,
+        totalItems,
         searchLoading,
         searchParams,
         onUsernameChange,
         onPageChange,
         search,
+        setAdminUsers,
       }}
     >
       {children}

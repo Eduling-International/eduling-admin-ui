@@ -1,24 +1,29 @@
+import { RoleEnum } from "@/enum";
+
 export interface CurrentUserInfo {
   id: string;
   username: string;
   email: string;
   name: string;
-  isActive: boolean;
-  isVerified: boolean;
+  active: boolean;
+  archived: boolean;
+  verified: boolean;
   createdAt: Date;
   updatedAt: Date;
   lastChangePassword: Date;
+  bgColor: string;
   role: UserInfoRole;
   createdUser: UserInfoCreatedUser;
 }
 
 export interface UserInfoRole {
   id: string;
-  name: string;
+  name: RoleEnum;
   description: string;
 }
 
 export interface UserInfoCreatedUser {
   id: string;
   username: string;
+  bgColor: string;
 }

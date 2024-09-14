@@ -4,5 +4,6 @@ export default interface CreateAdminAccountBody {
   username: string;
   password: string;
   name: string;
-  role: RoleEnum;
+  email: string;
+  role: RoleEnum.CREATOR | RoleEnum.VIEWER;
 }
