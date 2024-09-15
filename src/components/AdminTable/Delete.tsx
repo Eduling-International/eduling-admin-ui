@@ -91,7 +91,7 @@ const DeleteAdminUser: React.FC = React.memo(() => {
 
   return (
     <React.Fragment>
-      <MenuItem onClick={handleOpenDialog} disabled={userInfo.archived}>
+      <MenuItem onClick={handleOpenDialog}>
         Delete
       </MenuItem>
       <Dialog open={isDialogOpen} onClose={handleCloseDialog}>

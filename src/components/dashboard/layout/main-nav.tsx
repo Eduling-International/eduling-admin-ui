@@ -16,9 +16,11 @@ import { usePopover } from '@/hooks/use-popover';
 
 import { MobileNav } from './mobile-nav';
 import { UserPopover } from './user-popover';
+import { useCurrentUser } from '@/core/hooks';
 
 export function MainNav(): React.JSX.Element {
   const [openNav, setOpenNav] = React.useState<boolean>(false);
+  const { userInfo } = useCurrentUser();
 
   const userPopover = usePopover<HTMLDivElement>();
 
@@ -37,7 +39,12 @@ export function MainNav(): React.JSX.Element {
         <Stack
           direction="row"
           spacing={2}
-          sx={{ alignItems: 'center', justifyContent: 'space-between', minHeight: '64px', px: 2 }}
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            minHeight: '64px',
+            px: 2,
+          }}
         >
           <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
             <IconButton
@@ -50,16 +57,26 @@ export function MainNav(): React.JSX.Element {
             </IconButton>
           </Stack>
           <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-            <Avatar
-              onClick={userPopover.handleOpen}
-              ref={userPopover.anchorRef}
-              // src="/assets/avatar.png"
-              sx={{ cursor: 'pointer' }}
-            />
+            {userInfo && (
+              <Avatar
+                onClick={userPopover.handleOpen}
+                sx={{
+                  backgroundColor: userInfo.bgColor ?? 'default',
+                  cursor: 'pointer',
+                }}
+                ref={userPopover.anchorRef}
+              >
+                {userInfo.username.charAt(0).toUpperCase()}
+              </Avatar>
+            )}
           </Stack>
         </Stack>
       </Box>
-      <UserPopover anchorEl={userPopover.anchorRef.current} onClose={userPopover.handleClose} open={userPopover.open} />
+      <UserPopover
+        anchorEl={userPopover.anchorRef.current}
+        onClose={userPopover.handleClose}
+        open={userPopover.open}
+      />
       <MobileNav
         onClose={() => {
           setOpenNav(false);

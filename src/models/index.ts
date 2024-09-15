@@ -27,6 +27,7 @@ import {
 import CreateAdminAccountBody from './CreateAdminAccountBody';
 import SearchAdminUserParam from './SearchAdminUserParam';
 import SearchAdminUserResponse from './SearchAdminUserResponse';
+import ChangePasswordBody from './ChangePasswordBody';
 
 export type {
   LoginBody,
@@ -56,4 +57,5 @@ export type {
   CreateAdminAccountBody,
   SearchAdminUserParam,
   SearchAdminUserResponse,
+  ChangePasswordBody,
 };

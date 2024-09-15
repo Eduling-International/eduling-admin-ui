@@ -64,4 +64,10 @@ export const navItems = [
       },
     ],
   },
+  {
+    key: 'settings',
+    title: 'Settings',
+    href: paths.dashboard.settings,
+    icon: 'gear-six',
+  }
 ] satisfies NavItemConfig[];

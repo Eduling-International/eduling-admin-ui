@@ -1,4 +1,9 @@
-import { LoginBody, LoginResponse } from '@/models';
+import {
+  ChangePasswordBody,
+  CurrentUserInfo,
+  LoginBody,
+  LoginResponse,
+} from '@/models';
 import APIBaseService from './APIBaseService';
 import APIEndpoint from './Endpoint';
 
@@ -14,9 +19,15 @@ class AuthenticationService extends APIBaseService {
     );
   }
 
-  public async getCurrentUser() {
-    // Implement here
-  }
+  public getCurrentUser = () => {
+    return this.get<CurrentUserInfo>(
+      APIEndpoint.Authentication.CURRENT_USER_INFO,
+    );
+  };
+
+  public changePassword = (data: ChangePasswordBody) => {
+    return this.put<string>(APIEndpoint.Authentication.CHANGE_PASSWORD, data);
+  };
 }
 
 export default AuthenticationService;
