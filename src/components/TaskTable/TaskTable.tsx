@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import * as React from 'react';
 import { TaskFilter } from './TaskFilter';
 import {
   Box,
+  Button,
   Card,
   Divider,
   Paper,
@@ -22,10 +24,17 @@ import Image from 'next/image';
 import TaskLevelComponent from '@/components/CourseTaskSelection/TaskLevelComponent';
 import { TaskAge } from './TaskAge';
 import { CategoryMode } from './CategoryMode';
+import { ArrowClockwise } from '@phosphor-icons/react/dist/ssr';
 
 export const TaskTable: React.FC = React.memo(() => {
-  const { tasks, totalItems, params, changePageSearchParams } =
-    useTaskTableContext();
+  const {
+    tasks,
+    totalItems,
+    params,
+    changePageSearchParams,
+    executeSearchTask,
+    searchLoading,
+  } = useTaskTableContext();
   const onPageChange = React.useCallback(
     (_: React.MouseEvent<HTMLButtonElement> | null, page: number) => {
       changePageSearchParams(page + 1);
@@ -33,10 +42,28 @@ export const TaskTable: React.FC = React.memo(() => {
     [],
   );
 
+  const search = React.useCallback(() => {
+    executeSearchTask(params);
+  }, [params]);
+
   return (
     <React.Fragment>
       <TaskFilter />
       <Card>
+        <Box display={'flex'} my={1} mr={2} flexDirection="row-reverse">
+          <Box>
+            <Button
+              startIcon={<ArrowClockwise fontSize="var(--icon-fontSize-md)" />}
+              onClick={search}
+              variant="outlined"
+              size="small"
+              color="success"
+              disabled={searchLoading}
+            >
+              Refresh
+            </Button>
+          </Box>
+        </Box>
         <Box
           sx={{
             maxWidth: '100%',

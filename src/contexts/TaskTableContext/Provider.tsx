@@ -11,6 +11,7 @@ export interface TaskTableContextType {
   params: SearchTaskParams;
   totalItems: number;
   listCategory: Category[];
+  searchLoading: boolean;
   changeNameSearchParams: (value: string) => void;
   changeCategorySearchParams: (value: string) => void;
   changePageSearchParams: (value: number) => void;
@@ -61,7 +62,7 @@ export const TaskTableProvider: React.FC<TaskTableContextProps> = ({
     });
   }, []);
 
-  const [{ data: searchTaskResponse }, executeSearchTask] = useLazyFetch(
+  const [{ data: searchTaskResponse, loading: searchLoading }, executeSearchTask] = useLazyFetch(
     taskService.search,
   );
   const { data: categories } = useFetch(categoryService.search);
@@ -82,6 +83,7 @@ export const TaskTableProvider: React.FC<TaskTableContextProps> = ({
         params: searchParams,
         totalItems: totalItems,
         listCategory: categories ?? [],
+        searchLoading,
         changeNameSearchParams,
         changeCategorySearchParams,
         changePageSearchParams,

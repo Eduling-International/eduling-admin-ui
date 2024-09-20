@@ -85,6 +85,7 @@ export const ImportTaskDialog: React.FC = React.memo(() => {
                   fullWidth
                   margin="normal"
                   error={Boolean(errors.name)}
+                  disabled={loading}
                 >
                   <InputLabel>Sheet name</InputLabel>
                   <OutlinedInput
@@ -110,6 +111,7 @@ export const ImportTaskDialog: React.FC = React.memo(() => {
                   label="Rage"
                   placeholder="Enter range of the sheet. Example: A2:L8"
                   fullWidth
+                  disabled={loading}
                   margin="normal"
                   InputProps={{
                     startAdornment: (
@@ -127,6 +129,7 @@ export const ImportTaskDialog: React.FC = React.memo(() => {
                   {...field}
                   label="Exclude header"
                   control={<Checkbox defaultChecked name="excludeHeader" />}
+                  disabled={loading}
                 />
               )}
             />
@@ -143,6 +146,7 @@ export const ImportTaskDialog: React.FC = React.memo(() => {
                 endIcon={<Eraser />}
                 color="secondary"
                 variant="outlined"
+                disabled={loading}
               >
                 Reset
               </Button>
@@ -164,7 +168,7 @@ export const ImportTaskDialog: React.FC = React.memo(() => {
             )}
           </DialogContent>
           <DialogActions>
-            <Button onClick={closeImportDialog} size="small" color="error">
+            <Button disabled={loading} onClick={closeImportDialog} size="small" color="error">
               Cancel
             </Button>
             <Button
