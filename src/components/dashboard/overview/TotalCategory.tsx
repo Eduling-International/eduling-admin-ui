@@ -5,8 +5,10 @@ import { CategoryService } from '@/api';
 import { Card, CardContent, Stack, Typography, Avatar, CardActionArea } from '@mui/material';
 import type { SxProps } from '@mui/material/styles';
 import React, { useCallback, useMemo } from 'react';
-import { Cube as CubeIcon } from '@phosphor-icons/react/dist/ssr/Cube';
 import { useImmediateApi } from '@/core/hooks/useApi';
+import { ReplitLogo } from '@phosphor-icons/react/dist/ssr';
+import { useRouter } from 'next/navigation';
+import { paths } from '@/paths';
 
 interface TotalCategoryProps {
     sx?: SxProps;
@@ -14,6 +16,7 @@ interface TotalCategoryProps {
 
 const TotalCategory: React.FC<TotalCategoryProps> = ({ sx }) => {
     const categoryService = useMemo(() => new CategoryService(), []);
+    const router = useRouter();
 
     const countCategories = useCallback(() => {
         return categoryService.count();
@@ -21,7 +24,7 @@ const TotalCategory: React.FC<TotalCategoryProps> = ({ sx }) => {
     const { data } = useImmediateApi(countCategories);
 
     const onClickCard = useCallback(() => {
-        window.alert("This feature is coming soon !");
+        router.push(paths.dashboard.categories);
     }, [])
 
     return (
@@ -47,7 +50,7 @@ const TotalCategory: React.FC<TotalCategoryProps> = ({ sx }) => {
                                     width: '56px',
                                 }}
                             >
-                                <CubeIcon fontSize="var(--icon-fontSize-lg)" />
+                                <ReplitLogo fontSize="var(--icon-fontSize-lg)" />
                             </Avatar>
                         </Stack>
                     </Stack>

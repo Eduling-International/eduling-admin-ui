@@ -6,8 +6,7 @@ import { User as UserIcon } from '@phosphor-icons/react/dist/ssr/User';
 import { Users as UsersIcon } from '@phosphor-icons/react/dist/ssr/Users';
 import { XSquare } from '@phosphor-icons/react/dist/ssr/XSquare';
 import { BookOpen } from '@phosphor-icons/react/dist/ssr/BookOpen';
-import { Plus } from '@phosphor-icons/react/dist/ssr';
-import { ListBullets, UserCircleGear } from '@phosphor-icons/react/dist/ssr';
+import { Package, Plus, ListBullets, UserCircleGear, ReplitLogo } from '@phosphor-icons/react/dist/ssr';
 
 export const navIcons = {
   'chart-pie': ChartPieIcon,
@@ -20,4 +19,6 @@ export const navIcons = {
   'plus': Plus,
   tasks: ListBullets,
   admin: UserCircleGear,
+  package: Package,
+  replit: ReplitLogo
 } as Record<string, Icon>;

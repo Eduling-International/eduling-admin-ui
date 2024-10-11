@@ -1,6 +1,7 @@
 import {
   Category,
   CountResponse,
+  CreateCategoryBody,
   SearchCategoryParams,
   SearchCourseParams,
 } from '@/models';
@@ -22,5 +23,12 @@ export default class CategoryService extends APIBaseService {
       this.PREFIX + '/search',
       params,
     );
-  }
+  };
+
+  public create = (data: CreateCategoryBody) => {
+    return this.post<{ categoryId: string }, CreateCategoryBody>(
+      this.PREFIX + '/create',
+      data,
+    );
+  };
 }

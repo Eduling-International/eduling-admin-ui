@@ -45,6 +45,12 @@ export const navItems = [
   //   icon: 'x-square',
   // },
   {
+    key: 'categories',
+    title: 'Categories',
+    href: paths.dashboard.categories,
+    icon: 'replit',
+  },
+  {
     key: 'tasks',
     title: 'Tasks',
     href: paths.dashboard.tasks,
@@ -65,9 +71,23 @@ export const navItems = [
     ],
   },
   {
+    key: 'plans',
+    title: 'Plans',
+    href: paths.dashboard.plans,
+    icon: 'package',
+    items: [
+      {
+        key: 'create-plan',
+        title: 'New',
+        href: paths.dashboard.createPlan,
+        icon: 'plus',
+      },
+    ],
+  },
+  {
     key: 'settings',
     title: 'Settings',
     href: paths.dashboard.settings,
     icon: 'gear-six',
-  }
+  },
 ] satisfies NavItemConfig[];
